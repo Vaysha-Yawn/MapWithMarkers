@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@color/rout"
+    android:padding="20dp"
+    android:layout_height="wrap_content">
+    <EditText
+        android:id="@+id/textEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textColor="@color/white"
+        android:textColorHint="#BDBDBD"
+        android:hint="@string/marker_name_hint" />
+    <TextView
+        android:layout_marginTop="20dp"
+        android:id="@+id/apply"
+        android:textSize="24sp"
+        android:padding="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:background="@color/white"
+        android:text="@string/add_marker"/>
+</LinearLayout>

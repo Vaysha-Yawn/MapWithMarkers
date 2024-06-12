@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">TestAppAppio</string>
+    <string name="need_permission_text">To continue using this app, you need permission for the exact location</string>
+    <string name="give_permission">Give permission</string>
+    <string name="exit">Exit</string>
+    <string name="add_marker">Add marker</string>
+    <string name="marker_name_hint">Marker name</string>
+</resources>
