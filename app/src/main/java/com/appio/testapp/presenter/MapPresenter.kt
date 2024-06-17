@@ -14,12 +14,12 @@ class MapPresenter() {
 
     val markers = mutableListOf<MapPinEntity>()
     private lateinit var save: SaveRoom
-    private lateinit var context: Context
     private lateinit var displayRoute: DisplayRouteOnMap
+    private lateinit var showError: ViewShowError
 
-    fun start(context: Context, displayRoute: DisplayRouteOnMap) {
-        this.context = context
-        save = SaveRoom(context)
+    fun start(showError: ViewShowError, saveRoom: SaveRoom, displayRoute: DisplayRouteOnMap) {
+        save = saveRoom
+        this.showError = showError
         this.displayRoute = displayRoute
         getAllSavedPins()
     }
@@ -63,20 +63,14 @@ class MapPresenter() {
                     if (direction!!.isOK()) {
                         displayRoute.displayRoute(direction)
                     } else {
-                        errorHandle(direction.status)
+                        showError.errorHandle(direction.status)
                     }
                 },
                 onDirectionFailure = { t: Throwable ->
                     t.message.let {
-                        errorHandle(it!!)
+                        showError.errorHandle(it!!)
                     }
                 }
             )
     }
-
-    private fun errorHandle(errorMessage: String) {
-        Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show()
-    }
-
-
 }

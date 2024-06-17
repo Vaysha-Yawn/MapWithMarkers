@@ -9,13 +9,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.akexorcist.googledirection.model.Direction
 import com.akexorcist.googledirection.util.DirectionConverter
 import com.appio.testapp.R
 import com.appio.testapp.databinding.FragmentMapsBinding
+import com.appio.testapp.mmodel.SaveRoom
+import com.appio.testapp.presenter.DisplayRouteOnMap
 import com.appio.testapp.presenter.MapPresenter
+import com.appio.testapp.presenter.ViewShowError
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -29,7 +33,7 @@ import com.google.android.gms.maps.model.PolylineOptions
 class MapFragment : Fragment(), OnMapReadyCallback,
     GoogleMap.OnMyLocationButtonClickListener,
     GoogleMap.OnMapLongClickListener,
-    GoogleMap.OnMarkerClickListener, GoogleMap.OnMapClickListener, DisplayRouteOnMap {
+    GoogleMap.OnMarkerClickListener, GoogleMap.OnMapClickListener, DisplayRouteOnMap, ViewShowError {
 
     private lateinit var binding: FragmentMapsBinding
     private lateinit var mMap: GoogleMap
@@ -38,7 +42,7 @@ class MapFragment : Fragment(), OnMapReadyCallback,
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mapPresenter.start(requireContext(), this)
+        mapPresenter.start(this, SaveRoom(requireContext()), this)
         setMyLocByService()
     }
 
@@ -194,8 +198,9 @@ class MapFragment : Fragment(), OnMapReadyCallback,
         }
     }
 
+    override fun errorHandle(errorMessage: String) {
+        Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show()
+    }
+
 }
 
-interface DisplayRouteOnMap{
-    fun displayRoute(direction: Direction)
-}

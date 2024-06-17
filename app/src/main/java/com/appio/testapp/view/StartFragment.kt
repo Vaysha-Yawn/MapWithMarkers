@@ -19,7 +19,7 @@ class StartFragment : Fragment() {
 
     private lateinit var binding: FragmentStartBinding
 
-    val permissionActivityResultLauncher =
+    private val permissionActivityResultLauncher =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { map ->
             var r = false
             map.forEach { name, value ->
